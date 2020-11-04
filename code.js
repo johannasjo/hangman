@@ -25,6 +25,7 @@ letterContainerElement.addEventListener("click", (event) => {
       }
     });
   }
+  event.target.classList.add("clicked-letter");
 });
 
 makeEmptyLines();
