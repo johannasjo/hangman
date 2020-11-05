@@ -1,5 +1,7 @@
 const words = ["pony", "monkey", "banana", "yellow", "brown", "poop", "dogs"];
 const lineElements = document.querySelector("#line-container").childNodes;
+const letterContainerElement = document.querySelector(".letter-container");
+let guesses = 0;
 
 function randomWord(words) {
   let randomWord = Math.floor(Math.random() * (words.length - 1));
@@ -15,18 +17,32 @@ function makeEmptyLines() {
   }
 }
 
-const letterContainerElement = document.querySelector(".letter-container");
-letterContainerElement.addEventListener("click", (event) => {
+function handleClick(event) {
   const idLetter = event.target.id;
-  if (generatedWord.includes(idLetter)) {
+  if (!event.target.classList.contains("clicked-letter")) {
+    console.log("Kom inte hit om det stämmer");
     Array.from(generatedWord).forEach((letter, index) => {
       if (letter === idLetter) {
         lineElements[index].textContent = idLetter;
+      } else {
+        appendImage("h2.png", ".image-container");
       }
     });
+    event.target.classList.add("clicked-letter");
   }
-  event.target.classList.add("clicked-letter");
-});
+}
+
+letterContainerElement.addEventListener("click", handleClick);
+
+function appendImage(imageSrc, selector) {
+  let imageElement = document.createElement("img");
+  console.log(imageElement);
+  imageElement.width = "300";
+  imageElement.height = "500";
+
+  imageElement.src = `images/${imageSrc}`;
+  document.querySelector(selector).appendChild(imageElement);
+}
 
 makeEmptyLines();
 
