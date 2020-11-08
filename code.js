@@ -1,7 +1,12 @@
 const words = ["pony", "monkey", "banana", "yellow", "brown", "poop", "dogs"];
 const lineElements = document.querySelector("#line-container").childNodes;
 const letterContainerElement = document.querySelector(".letter-container");
+const imageElement = document.querySelector("#image");
 let guesses = 0;
+let badGuesses = 0;
+
+let name = "Carl";
+let helloName = "Hello " + name;
 
 function randomWord(words) {
   let randomWord = Math.floor(Math.random() * (words.length - 1));
@@ -19,32 +24,32 @@ function makeEmptyLines() {
 
 function handleClick(event) {
   const idLetter = event.target.id;
-  if (!event.target.classList.contains("clicked-letter")) {
-    console.log("Kom inte hit om det stämmer");
-    Array.from(generatedWord).forEach((letter, index) => {
-      if (letter === idLetter) {
-        lineElements[index].textContent = idLetter;
-      } else {
-        appendImage("h2.png", ".image-container");
+  if (guesses < 7) {
+    if (!event.target.classList.contains("clicked-letter")) {
+      console.log("Kom inte hit om det stämmer");
+      let matches = false;
+      Array.from(generatedWord).forEach((letter, index) => {
+        if (letter === idLetter) {
+          lineElements[index].textContent = idLetter;
+          matches = true;
+        }
+      });
+      if (matches === false) {
+        badGuesses += 1;
+        let image = "h" + badGuesses + ".png";
+        imageElement.src = `images/${image}`;
       }
-    });
-    event.target.classList.add("clicked-letter");
+      console.log("If it's not the correct char", matches);
+      event.target.classList.add("clicked-letter");
+      guesses = guesses + 1;
+    }
   }
 }
 
 letterContainerElement.addEventListener("click", handleClick);
 
-function appendImage(imageSrc, selector) {
-  let imageElement = document.createElement("img");
-  console.log(imageElement);
-  imageElement.width = "300";
-  imageElement.height = "500";
-
-  imageElement.src = `images/${imageSrc}`;
-  document.querySelector(selector).appendChild(imageElement);
-}
-
 makeEmptyLines();
 
 console.log("what is this", lineElements);
 console.log("this is the generated word", generatedWord);
+console.log("This is the amount of guesses: ", guesses);
