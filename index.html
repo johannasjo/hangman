@@ -3,48 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hangman</title>
+    <title>Pushy cat</title>
     <link rel="stylesheet" href="style.css" type="text/css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chango&family=Nosifer&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h1>Hello and welcome to the most morbid game on earth!</h1>
-    <div class="gore-font"><h2>HANGMAN</h2></div>
+    <h1>WELCOME TO THE PLACE WHERE GLASSES COME TO <span>DIE</span></h1>
+    <div class="water-font">
+      <h2>PUSHY CAT</h2>
+    </div>
 
     <div class="btn-container">
-      <button>Click here to start a new game!</button>
+      <button id="start-button" onclick="location.href='game.html';">
+        Click here to start a new game!
+      </button>
     </div>
-    <div class="image-container">
-      <img id="image" src="images/h0.png" />
-    </div>
-    <div id="line-container"></div>
-    <div class="letter-container">
-      <div class="letter" id="a">A</div>
-      <div class="letter" id="b">B</div>
-      <div class="letter" id="c">C</div>
-      <div class="letter" id="d">D</div>
-      <div class="letter" id="e">E</div>
-      <div class="letter" id="f">F</div>
-      <div class="letter" id="g">G</div>
-      <div class="letter" id="h">H</div>
-      <div class="letter" id="i">I</div>
-      <div class="letter" id="j">J</div>
-      <div class="letter" id="k">K</div>
-      <div class="letter" id="l">L</div>
-      <div class="letter" id="m">M</div>
-      <div class="letter" id="n">N</div>
-      <div class="letter" id="o">O</div>
-      <div class="letter" id="p">P</div>
-      <div class="letter" id="q">Q</div>
-      <div class="letter" id="r">R</div>
-      <div class="letter" id="s">S</div>
-      <div class="letter" id="t">T</div>
-      <div class="letter" id="u">U</div>
-      <div class="letter" id="v">V</div>
-      <div class="letter" id="w">W</div>
-      <div class="letter" id="x">X</div>
-      <div class="letter" id="y">Y</div>
-      <div class="letter" id="z">Z</div>
-    </div>
-    <script src="code.js"></script>
+    <script src="indexCode.js"></script>
   </body>
 </html>

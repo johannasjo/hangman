@@ -24,7 +24,7 @@ function makeEmptyLines() {
 
 function handleClick(event) {
   const idLetter = event.target.id;
-  if (guesses < 7) {
+  if (guesses < 6) {
     if (!event.target.classList.contains("clicked-letter")) {
       console.log("Kom inte hit om det stämmer");
       let matches = false;
@@ -34,10 +34,17 @@ function handleClick(event) {
           matches = true;
         }
       });
-      if (matches === false) {
+      console.log({ matches, badGuesses });
+      if (matches === false && badGuesses < 6) {
         badGuesses += 1;
+
         let image = "h" + badGuesses + ".png";
         imageElement.src = `images/${image}`;
+      } else {
+        document.querySelector(".info-box").textContent = " YOU LOSE!";
+        let playAgainButton = document.createElement("button");
+        playAgainButton.textContent = "Click here to play again";
+        document.querySelector(".btn-container").appendChild(playAgainButton);
       }
       console.log("If it's not the correct char", matches);
       event.target.classList.add("clicked-letter");
