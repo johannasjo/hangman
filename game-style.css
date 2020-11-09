@@ -60,10 +60,21 @@
 .btn-container {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  height: 280px;
+  align-items: center;
+  height: 200px;
   border: 2px solid red;
 }
 
-button {
+#again-button {
+  height: 100px;
+  width: 300px;
+  border-radius: 4%;
+  box-shadow: 2, 1, 1;
+  background-color: rgb(255, 245, 61);
+  font-size: 1.25em;
+}
+
+#again-button:hover {
+  transform: scale(1.5);
+  cursor: pointer;
 }

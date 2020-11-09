@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  background: azure;
+}
 
 h1 {
   padding: 2em;
@@ -30,7 +33,7 @@ h1 span {
   background-image: url(images/wave.png);
   background-repeat: repeat-x;
   -webkit-background-clip: text;
-  animation: animate 15s normal forwards ease-in-out;
+  animation: animate 10s forwards;
   animation-iteration-count: 1;
   border: 2px solid green;
 }
@@ -63,6 +66,7 @@ h1 span {
   box-shadow: 2, 1, 1;
   background-color: rgb(255, 245, 61);
   font-size: 1.25em;
+  margin-top: 3em;
 }
 
 #start-button:hover {

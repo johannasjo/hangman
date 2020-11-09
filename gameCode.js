@@ -1,7 +1,9 @@
 const words = ["pony", "monkey", "banana", "yellow", "brown", "poop", "dogs"];
+const lineContainer = document.querySelector("#line-container");
 const lineElements = document.querySelector("#line-container").childNodes;
 const letterContainerElement = document.querySelector(".letter-container");
 const imageElement = document.querySelector("#image");
+
 let guesses = 0;
 let badGuesses = 0;
 
@@ -22,6 +24,23 @@ function makeEmptyLines() {
   }
 }
 
+function reset() {
+  console.log("This is linelemenets", lineElements);
+  while (lineContainer.lastChild) {
+    lineContainer.removeChild(lineContainer.lastChild);
+  }
+  const letterChildren = letterContainerElement.children;
+
+  for (let i = 0; i < letterChildren.length; i++) {
+    letterChildren[i].classList.remove("clicked-letter");
+  }
+  document.querySelector(".info-box").textContent = "";
+  document.querySelector(".btn-container").children[0].remove();
+  imageElement.src = `images/h0.png`;
+  guesses = 0;
+  badGuesses = 0;
+}
+
 function handleClick(event) {
   const idLetter = event.target.id;
   if (guesses < 6) {
@@ -40,18 +59,22 @@ function handleClick(event) {
 
         let image = "h" + badGuesses + ".png";
         imageElement.src = `images/${image}`;
-      } else {
-        document.querySelector(".info-box").textContent = " YOU LOSE!";
-        let playAgainButton = document.createElement("button");
-        playAgainButton.textContent = "Click here to play again";
-        document.querySelector(".btn-container").appendChild(playAgainButton);
       }
       console.log("If it's not the correct char", matches);
       event.target.classList.add("clicked-letter");
       guesses = guesses + 1;
     }
+  } else {
+    document.querySelector(".info-box").textContent = " YOU LOSE!";
+    let playAgainButton = document.createElement("button");
+    playAgainButton.textContent = "Click here to play again";
+    document.querySelector(".btn-container").appendChild(playAgainButton);
+    playAgainButton.setAttribute("id", "again-button");
+    playAgainButton.addEventListener("click", reset);
   }
 }
+
+document.querySelector("#reset-button").addEventListener("click", reset);
 
 letterContainerElement.addEventListener("click", handleClick);
 
