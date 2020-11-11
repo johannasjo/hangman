@@ -78,3 +78,12 @@
   transform: scale(1.5);
   cursor: pointer;
 }
+
+.win-box {
+  font-size: 5em;
+  font-family: "Chango", cursive;
+  color: blue;
+  position: absolute;
+  left: 25%;
+  top: 10%;
+}

@@ -6,6 +6,7 @@ const imageElement = document.querySelector("#image");
 
 let guesses = 0;
 let badGuesses = 0;
+let counter = 0;
 
 let name = "Carl";
 let helloName = "Hello " + name;
@@ -15,6 +16,7 @@ function randomWord(words) {
   return words[randomWord];
 }
 let generatedWord = randomWord(words);
+document.querySelector(".generated-word").textContent = generatedWord;
 
 function makeEmptyLines() {
   for (let letter of generatedWord) {
@@ -35,32 +37,52 @@ function reset() {
     letterChildren[i].classList.remove("clicked-letter");
   }
   document.querySelector(".info-box").textContent = "";
+  document.querySelector(".win-box").textContent = "";
   document.querySelector(".btn-container").children[0].remove();
   imageElement.src = `images/h0.png`;
   guesses = 0;
   badGuesses = 0;
+  counter = 0;
+  generatedWord = randomWord(words);
+  makeEmptyLines(generatedWord);
+  document.querySelector(".generated-word").textContent = generatedWord;
 }
 
 function handleClick(event) {
   const idLetter = event.target.id;
+
+  if (!event.target.classList.contains("letter")) {
+    return;
+  }
   if (guesses < 6) {
     if (!event.target.classList.contains("clicked-letter")) {
-      console.log("Kom inte hit om det stämmer");
       let matches = false;
       Array.from(generatedWord).forEach((letter, index) => {
         if (letter === idLetter) {
           lineElements[index].textContent = idLetter;
           matches = true;
+          counter += 1;
+
+          if (counter == generatedWord.length) {
+            document.querySelector(".win-box").textContent = " YOU WIN!";
+            let playAgainButton = document.createElement("button");
+            playAgainButton.textContent = "Click here to play again";
+            document
+              .querySelector(".btn-container")
+              .appendChild(playAgainButton);
+            playAgainButton.setAttribute("id", "again-button");
+            playAgainButton.addEventListener("click", reset);
+          }
         }
       });
-      console.log({ matches, badGuesses });
+      console.log(counter);
+
       if (matches === false && badGuesses < 6) {
         badGuesses += 1;
-
         let image = "h" + badGuesses + ".png";
         imageElement.src = `images/${image}`;
       }
-      console.log("If it's not the correct char", matches);
+
       event.target.classList.add("clicked-letter");
       guesses = guesses + 1;
     }
@@ -80,6 +102,4 @@ letterContainerElement.addEventListener("click", handleClick);
 
 makeEmptyLines();
 
-console.log("what is this", lineElements);
-console.log("this is the generated word", generatedWord);
-console.log("This is the amount of guesses: ", guesses);
+// add counter if counter is the same as generaeetdword.length then print "You win!"
