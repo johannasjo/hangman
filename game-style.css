@@ -4,25 +4,35 @@
   box-sizing: border-box;
 }
 
+body {
+  background: azure;
+}
+
 .letter-container {
-  width: 800px;
+  width: 100vw;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  border: 2px solid blue;
+}
+.input-text {
+  position: absolute;
+  left: 50%;
+  top: 5%;
 }
 
 .letter {
-  height: 80px;
-  width: 80px;
+  height: 2em;
+  width: 2em;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 20px;
   border: 2px solid black;
-  background-color: lightgreen;
+  background-color: rgba(38, 185, 38, 0.9);
+  font-size: 2em;
+  cursor: pointer;
 }
 
 .clicked-letter {
@@ -37,41 +47,39 @@
 }
 
 #line-container > * {
-  font-size: 150px;
+  font-size: 12em;
 }
 
 #image {
-  width: auto;
-  height: auto;
+  width: 500px;
+  height: 500px;
   display: block;
   margin: 0 auto;
-  padding: 5em;
 }
 
-.info-box {
+.info-box,
+.win-box {
+  position: relative;
+  left: -50%;
   font-size: 5em;
   font-family: "Nosifer", cursive;
   color: red;
-  position: absolute;
-  left: 25%;
-  top: 10%;
 }
 
 .btn-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px;
-  border: 2px solid red;
 }
 
 #again-button {
-  height: 100px;
-  width: 300px;
+  height: 150px;
+  width: 350px;
   border-radius: 4%;
   box-shadow: 2, 1, 1;
   background-color: rgb(255, 245, 61);
   font-size: 1.25em;
+  margin-bottom: 3em;
 }
 
 #again-button:hover {
@@ -80,10 +88,57 @@
 }
 
 .win-box {
-  font-size: 5em;
   font-family: "Chango", cursive;
   color: blue;
-  position: absolute;
-  left: 25%;
-  top: 10%;
+}
+
+@media screen and (max-width: 1024px) {
+  #again-button {
+    height: 150px;
+    width: 350px;
+    font-size: 1.75em;
+    margin-top: 2em;
+  }
+
+  .info-box,
+  .win-box {
+    font-size: 4em;
+  }
+
+  #line-container > * {
+    font-size: 130px;
+  }
+}
+
+@media screen and (max-width: 800px) and (min-width: 501px) {
+  #again-button {
+    height: 150px;
+    width: 350px;
+    font-size: 1.75em;
+    margin-top: 2em;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .info-box,
+  .win-box {
+    font-size: 3.5em;
+  }
+  #again-button {
+    margin-top: 2em;
+    height: 140px;
+    width: 290px;
+    font-size: 2em;
+  }
+
+  #line-container > * {
+    font-size: 100px;
+  }
+
+  #image {
+    width: 320px;
+    height: 300px;
+    display: block;
+    margin: 0 auto;
+  }
 }

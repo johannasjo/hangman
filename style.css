@@ -21,13 +21,14 @@ h1 span {
 .water-font {
   position: absolute;
   top: 30%;
-  left: 54%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .water-font h2 {
+  position: relative;
   font-family: "Chango", cursive;
-  font-size: 5em;
+  font-size: 5.5em;
   width: 700px;
   color: rgba(255, 255, 255, 0.1);
   background-image: url(images/wave.png);
@@ -46,7 +47,7 @@ h1 span {
 .btn-container {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  /* align-items: flex-end; */
   height: 280px;
 }
 
@@ -63,4 +64,53 @@ h1 span {
 #start-button:hover {
   transform: scale(1.5);
   cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .water-font {
+    position: absolute;
+    top: 50%;
+    left: 65%;
+  }
+
+  .water-font h2 {
+    position: relative;
+    font-size: 3.5em;
+    height: 300px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .water-font {
+    position: absolute;
+    top: 52%;
+    left: 70%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  h1 {
+    font-size: 30px;
+  }
+
+  .water-font {
+    position: absolute;
+    top: 22%;
+    left: 96%;
+  }
+
+  .water-font h2 {
+    font-size: 2em;
+    height: 100px;
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    height: 280px;
+  }
+
+  #start-button {
+    margin-top: 2em;
+  }
 }

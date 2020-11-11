@@ -1,4 +1,17 @@
-const words = ["pony", "monkey", "banana", "yellow", "brown", "poop", "dogs"];
+const words = [
+  "tail",
+  "claw",
+  "banana",
+  "yellow",
+  "brown",
+  "poop",
+  "dogs",
+  "spotted",
+  "water",
+  "ear",
+  "floofy",
+  "goofy",
+];
 const lineContainer = document.querySelector("#line-container");
 const lineElements = document.querySelector("#line-container").childNodes;
 const letterContainerElement = document.querySelector(".letter-container");
@@ -8,15 +21,12 @@ let guesses = 0;
 let badGuesses = 0;
 let counter = 0;
 
-let name = "Carl";
-let helloName = "Hello " + name;
-
 function randomWord(words) {
   let randomWord = Math.floor(Math.random() * (words.length - 1));
   return words[randomWord];
 }
 let generatedWord = randomWord(words);
-document.querySelector(".generated-word").textContent = generatedWord;
+/* document.querySelector(".generated-word").textContent = generatedWord; */
 
 function makeEmptyLines() {
   for (let letter of generatedWord) {
@@ -26,8 +36,15 @@ function makeEmptyLines() {
   }
 }
 
+function playAgain() {
+  let playAgainButton = document.createElement("button");
+  playAgainButton.textContent = "Click here to play again";
+  document.querySelector(".btn-container").appendChild(playAgainButton);
+  playAgainButton.setAttribute("id", "again-button");
+  playAgainButton.addEventListener("click", reset);
+}
+
 function reset() {
-  console.log("This is linelemenets", lineElements);
   while (lineContainer.lastChild) {
     lineContainer.removeChild(lineContainer.lastChild);
   }
@@ -39,13 +56,13 @@ function reset() {
   document.querySelector(".info-box").textContent = "";
   document.querySelector(".win-box").textContent = "";
   document.querySelector(".btn-container").children[0].remove();
-  imageElement.src = `images/h0.png`;
+  imageElement.src = `images/n1.jpg`;
   guesses = 0;
   badGuesses = 0;
   counter = 0;
   generatedWord = randomWord(words);
   makeEmptyLines(generatedWord);
-  document.querySelector(".generated-word").textContent = generatedWord;
+  /* document.querySelector(".generated-word").textContent = generatedWord; */
 }
 
 function handleClick(event) {
@@ -79,7 +96,7 @@ function handleClick(event) {
 
       if (matches === false && badGuesses < 6) {
         badGuesses += 1;
-        let image = "h" + badGuesses + ".png";
+        let image = "n" + badGuesses + ".jpg";
         imageElement.src = `images/${image}`;
       }
 
@@ -88,15 +105,10 @@ function handleClick(event) {
     }
   } else {
     document.querySelector(".info-box").textContent = " YOU LOSE!";
-    let playAgainButton = document.createElement("button");
-    playAgainButton.textContent = "Click here to play again";
-    document.querySelector(".btn-container").appendChild(playAgainButton);
-    playAgainButton.setAttribute("id", "again-button");
-    playAgainButton.addEventListener("click", reset);
+    imageElement.src = "images/n7.jpg";
+    playAgain();
   }
 }
-
-document.querySelector("#reset-button").addEventListener("click", reset);
 
 letterContainerElement.addEventListener("click", handleClick);
 
