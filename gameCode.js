@@ -87,30 +87,30 @@ function handleClick(event) {
   if (!event.target.classList.contains("letter")) {
     return;
   }
-  if (guesses < 6) {
-    if (!event.target.classList.contains("clicked-letter")) {
-      let matches = false;
-       for (let i = 0; i < generatedWord.length; i++) {
-         if (generatedWord[i] === idLetter) {
-          lineElements[i].textContent = idLetter;
-          matches = true;
-          counter += 1;
+  if (guesses <= 6) {
+    let matches = false;
+    for (let i = 0; i < generatedWord.length; i++) {
+      if (generatedWord[i] === idLetter) {
+        lineElements[i].textContent = idLetter;
+        matches = true;
+        counter += 1;
 
-          if (counter == generatedWord.length) {
-            wonGame();
-          } 
-       }
-
-      if (matches === false && badGuesses < 6) {
-        badGuesses += 1;
-        let image = "n" + badGuesses + ".jpg";
-        imageElement.src = `images/${image}`;
+        if (counter == generatedWord.length) {
+          wonGame();
+        }
       }
-
-      event.target.classList.add("clicked-letter");
-      guesses = guesses + 1;
     }
-  } else {
+
+    if (matches === false && badGuesses < 6) {
+      badGuesses += 1;
+      let image = "n" + badGuesses + ".jpg";
+      imageElement.src = `images/${image}`;
+    }
+
+    event.target.classList.add("clicked-letter");
+    guesses = guesses + 1;
+  }
+  if (guesses >= 7) {
     lostGame();
     playAgain();
   }
