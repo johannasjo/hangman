@@ -77,8 +77,6 @@ function reset() {
   removeClassFromElementChildren("clicked-letter");
   generatedWord = randomWord(words);
   makeEmptyLines(generatedWord);
-
-  /* document.querySelector(".generated-word").textContent = generatedWord; */
 }
 
 function handleClick(event) {
