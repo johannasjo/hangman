@@ -55,6 +55,7 @@ body {
   height: 500px;
   display: block;
   margin: 0 auto;
+  padding-top: 3em;
 }
 
 .info-box,

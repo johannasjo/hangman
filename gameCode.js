@@ -4,7 +4,6 @@ const words = [
   "banana",
   "yellow",
   "brown",
-  "poop",
   "dogs",
   "spotted",
   "water",
@@ -26,7 +25,6 @@ function randomWord(words) {
   return words[randomWord];
 }
 let generatedWord = randomWord(words);
-/* document.querySelector(".generated-word").textContent = generatedWord; */
 
 function makeEmptyLines() {
   for (let letter of generatedWord) {
@@ -44,15 +42,30 @@ function playAgain() {
   playAgainButton.addEventListener("click", reset);
 }
 
-function reset() {
+function wonGame() {
+  document.querySelector(".win-box").textContent = " YOU WIN!";
+  playAgain();
+}
+
+function lostGame() {
+  document.querySelector(".info-box").textContent = " YOU LOSE!";
+  imageElement.src = "images/n7.jpg";
+}
+
+function removeLines() {
   while (lineContainer.lastChild) {
     lineContainer.removeChild(lineContainer.lastChild);
   }
-  const letterChildren = letterContainerElement.children;
+}
 
+function removeClassFromElementChildren(className) {
+  const letterChildren = letterContainerElement.children;
   for (let i = 0; i < letterChildren.length; i++) {
-    letterChildren[i].classList.remove("clicked-letter");
+    letterChildren[i].classList.remove(className);
   }
+}
+
+function reset() {
   document.querySelector(".info-box").textContent = "";
   document.querySelector(".win-box").textContent = "";
   document.querySelector(".btn-container").children[0].remove();
@@ -60,8 +73,11 @@ function reset() {
   guesses = 0;
   badGuesses = 0;
   counter = 0;
+  removeLines();
+  removeClassFromElementChildren("clicked-letter");
   generatedWord = randomWord(words);
   makeEmptyLines(generatedWord);
+
   /* document.querySelector(".generated-word").textContent = generatedWord; */
 }
 
@@ -74,25 +90,16 @@ function handleClick(event) {
   if (guesses < 6) {
     if (!event.target.classList.contains("clicked-letter")) {
       let matches = false;
-      Array.from(generatedWord).forEach((letter, index) => {
-        if (letter === idLetter) {
-          lineElements[index].textContent = idLetter;
+       for (let i = 0; i < generatedWord.length; i++) {
+         if (generatedWord[i] === idLetter) {
+          lineElements[i].textContent = idLetter;
           matches = true;
           counter += 1;
 
           if (counter == generatedWord.length) {
-            document.querySelector(".win-box").textContent = " YOU WIN!";
-            let playAgainButton = document.createElement("button");
-            playAgainButton.textContent = "Click here to play again";
-            document
-              .querySelector(".btn-container")
-              .appendChild(playAgainButton);
-            playAgainButton.setAttribute("id", "again-button");
-            playAgainButton.addEventListener("click", reset);
-          }
-        }
-      });
-      console.log(counter);
+            wonGame();
+          } 
+       }
 
       if (matches === false && badGuesses < 6) {
         badGuesses += 1;
@@ -104,8 +111,7 @@ function handleClick(event) {
       guesses = guesses + 1;
     }
   } else {
-    document.querySelector(".info-box").textContent = " YOU LOSE!";
-    imageElement.src = "images/n7.jpg";
+    lostGame();
     playAgain();
   }
 }
@@ -113,5 +119,3 @@ function handleClick(event) {
 letterContainerElement.addEventListener("click", handleClick);
 
 makeEmptyLines();
-
-// add counter if counter is the same as generaeetdword.length then print "You win!"
